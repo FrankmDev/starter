@@ -1,27 +1,30 @@
 ---
-import Button from "@/components/primitives/Button.astro";
-import Container from "@/components/primitives/Container.astro";
-import Section from "@/components/primitives/Section.astro";
-import { uiText } from "@/config/ui";
+import Container from "@/components/Container.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { projectConfig } from "../../project.config";
 ---
 
 <BaseLayout
-  title={uiText.notFoundTitle}
-  description={uiText.notFoundDescription}
+  title={projectConfig.ui.notFoundTitle}
+  description={projectConfig.ui.notFoundDescription}
   noindex
 >
-  <Section
-    class="grid min-h-svh items-center"
+  <section
+    class="grid min-h-svh items-center py-section"
     aria-labelledby="not-found-title"
   >
-    <Container size="narrow">
+    <Container size="reading">
       <div class="space-y-6">
-        <p class="font-mono text-lg text-muted" aria-hidden="true">404</p>
-        <h1 id="not-found-title">{uiText.notFoundTitle}</h1>
-        <p>{uiText.notFoundDescription}</p>
-        <Button href="/">{uiText.returnHome}</Button>
+        <p class="text-heading text-muted" aria-hidden="true">404</p>
+        <h1 id="not-found-title">{projectConfig.ui.notFoundTitle}</h1>
+        <p>{projectConfig.ui.notFoundDescription}</p>
+        <a
+          class="inline-flex min-h-11 items-center rounded-radius bg-accent px-5 py-3 font-semibold text-canvas"
+          href="/"
+        >
+          {projectConfig.ui.returnHome}
+        </a>
       </div>
     </Container>
-  </Section>
+  </section>
 </BaseLayout>

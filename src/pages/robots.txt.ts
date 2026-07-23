@@ -2,12 +2,17 @@ import type { APIRoute } from "astro";
 import { projectConfig } from "../../project.config";
 
 export const GET: APIRoute = ({ site }) => {
-  const origin = site ?? new URL("https://example.com");
-  const sitemap = new URL("/sitemap-index.xml", origin);
-  const policy = projectConfig.meta.initialized ? "Allow: /" : "Disallow: /";
-  const body = `User-agent: *\n${policy}\n\nSitemap: ${sitemap.href}\n`;
+  const isPublished =
+    projectConfig.initialized &&
+    projectConfig.site.url.length > 0 &&
+    site !== undefined;
+  const lines = ["User-agent: *", isPublished ? "Allow: /" : "Disallow: /"];
 
-  return new Response(body, {
+  if (isPublished) {
+    lines.push("", `Sitemap: ${new URL("/sitemap-index.xml", site).href}`);
+  }
+
+  return new Response(`${lines.join("\n")}\n`, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
     },

@@ -1,15 +1,25 @@
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import { defineConfig } from "astro/config";
 import { projectConfig } from "./project.config";
 
-const site = projectConfig.identity.domain || "https://example.com";
+const hasPublishedSite =
+  projectConfig.initialized && projectConfig.site.url.length > 0;
 
 export default defineConfig({
-  site,
-  output: "static",
+  ...(hasPublishedSite
+    ? {
+        site: projectConfig.site.url,
+        integrations: [sitemap()],
+      }
+    : {}),
   compressHTML: true,
-  integrations: [sitemap()],
+  markdown: {
+    syntaxHighlight: false,
+  },
+  security: {
+    csp: true,
+  },
   vite: {
     plugins: [tailwindcss()],
   },

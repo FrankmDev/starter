@@ -1,0 +1,77 @@
+---
+import { projectConfig } from "../../project.config";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+}
+
+const {
+  title = projectConfig.seo.defaultTitle,
+  description = projectConfig.seo.defaultDescription,
+  canonical,
+  image = projectConfig.seo.defaultImage,
+  imageAlt,
+  type = "website",
+  noindex = false,
+} = Astro.props;
+
+const isPublished =
+  projectConfig.initialized && projectConfig.site.url.length > 0;
+const pageTitle = title || projectConfig.site.name || "Astro starter";
+const robots = noindex || !isPublished ? "noindex, nofollow" : "index, follow";
+
+let canonicalUrl: string | undefined;
+let imageUrl: string | undefined;
+
+if (isPublished) {
+  const canonicalTarget = new URL(
+    canonical ?? Astro.url.pathname,
+    projectConfig.site.url,
+  );
+  canonicalTarget.search = "";
+  canonicalTarget.hash = "";
+  canonicalUrl = canonicalTarget.href;
+  imageUrl = image ? new URL(image, projectConfig.site.url).href : undefined;
+}
+---
+
+<title>{pageTitle}</title>
+{description && <meta name="description" content={description} />}
+<meta name="robots" content={robots} />
+{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+{
+  isPublished && (
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+  )
+}
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={pageTitle} />
+{description && <meta property="og:description" content={description} />}
+<meta
+  property="og:locale"
+  content={projectConfig.site.locale.replaceAll("-", "_")}
+/>
+{
+  projectConfig.site.name && (
+    <meta property="og:site_name" content={projectConfig.site.name} />
+  )
+}
+{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+{imageUrl && <meta property="og:image" content={imageUrl} />}
+{imageUrl && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+
+<meta
+  name="twitter:card"
+  content={imageUrl ? "summary_large_image" : "summary"}
+/>
+<meta name="twitter:title" content={pageTitle} />
+{description && <meta name="twitter:description" content={description} />}
+{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+{imageUrl && imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}

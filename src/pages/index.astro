@@ -1,41 +1,45 @@
 ---
-import Container from "@/components/primitives/Container.astro";
-import Section from "@/components/primitives/Section.astro";
-import { siteConfig } from "@/config/site";
-import { uiText } from "@/config/ui";
+import Container from "@/components/Container.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { projectConfig } from "../../project.config";
 
-const status = projectConfig.meta.initialized
-  ? uiText.foundationStatus
-  : "starter";
-const schema = projectConfig.meta.initialized
+const title =
+  projectConfig.seo.defaultTitle || projectConfig.site.name || "Astro starter";
+const description =
+  projectConfig.seo.defaultDescription ||
+  "Completa START_HERE.md para inicializar este proyecto.";
+const schema = projectConfig.initialized
   ? {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: siteConfig.name,
-      url: siteConfig.domain,
+      name: projectConfig.site.name,
+      url: projectConfig.site.url,
+      publisher: {
+        "@type": "Organization",
+        name: projectConfig.site.company,
+        url: projectConfig.site.url,
+      },
     }
   : undefined;
 ---
 
 <BaseLayout
-  title={siteConfig.name}
-  description={siteConfig.description}
+  title={title}
+  description={description}
   {...schema ? { schema } : {}}
 >
-  <Section
-    class="grid min-h-svh items-center"
+  <section
+    class="grid min-h-svh items-center py-section"
     aria-labelledby="foundation-title"
   >
-    <Container size="narrow">
+    <Container size="reading">
       <div class="space-y-6">
-        <p class="text-sm font-bold tracking-[0.08em] text-muted uppercase">
-          {status}
+        <p class="text-sm font-bold tracking-wide text-muted uppercase">
+          {projectConfig.initialized ? "Base preparada" : "Astro starter"}
         </p>
-        <h1 id="foundation-title">{siteConfig.name}</h1>
-        <p>{uiText.foundationDescription}</p>
+        <h1 id="foundation-title">{title}</h1>
+        <p>{description}</p>
       </div>
     </Container>
-  </Section>
+  </section>
 </BaseLayout>

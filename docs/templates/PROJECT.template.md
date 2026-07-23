@@ -1,89 +1,76 @@
-<!-- TEMPLATE CONTRACT: remove this comment and every placeholder. Write confirmed product facts, scope, ownership, constraints, and open decisions. Do not put visual or implementation details here. -->
-
 # {{PROJECT_NAME}} — Project
 
-## Identity
+> Product, content, scope, SEO, functionality, integrations, constraints, and
+> technical decisions live here. Runtime values live in `project.config.ts`;
+> visual decisions live in `DESIGN.md`.
 
-- Project: {{PROJECT_NAME}}
-- Company or owner: {{COMPANY_NAME}}
-- Production domain: {{DOMAIN}}
-- Language, locale, and direction: {{LANGUAGE}} / {{LOCALE}} / {{DIRECTION}}
-- Sector: {{SECTOR}}
-- Offer summary: {{SUMMARY}}
+## Product and audience
 
-## Problem and offer
+{{PRODUCT_AND_AUDIENCE}}
 
-State the audience problem, the offered solution, the value exchanged, and what this project must make easier. Separate confirmed facts from positioning still awaiting approval.
+Define the offer, audience needs, context, objections, and approved evidence.
 
-## Audience
+## Objectives and conversion
 
-{{AUDIENCE}}
+{{OBJECTIVES}}
 
-Describe primary and secondary audiences, context of use, intent, prior knowledge, objections, accessibility needs, and the decision each group must be able to make.
+State the primary conversion, supporting actions, and approved success signals.
+Do not invent metrics.
 
-## Objectives and success
+## Content
 
-- Primary goal: {{PRIMARY_GOAL}}
-- Primary conversion: {{PRIMARY_CONVERSION}}
+{{CONTENT}}
 
-Define observable success signals without inventing numeric targets. Record approved metrics only when owners, tools, and consent requirements are known.
+Record source material, voice, message hierarchy, approved claims, prohibited
+claims, required copy, asset ownership, and known gaps.
 
-## Offer and evidence
+## Routes and navigation
 
-### Services or products
+{{ROUTES_AND_NAVIGATION}}
 
-{{SERVICES}}
+For each route define its purpose, audience need, conversion, content/section
+order, and status. Record navigation intent and exclusions; exact runtime links
+belong in `project.config.ts`.
 
-### Differentiators and proof
+## Functionality and integrations
 
-{{DIFFERENTIATORS}}
+{{FUNCTIONALITY_AND_INTEGRATIONS}}
 
-Distinguish a claim from its approved evidence. Mark missing proof explicitly.
+Include only confirmed requirements. For each external service identify its
+purpose, data involved, credentials/consent needs, failure behavior, and CSP
+requirements.
 
-## Scope
+## SEO
 
-### Route inventory
+{{SEO}}
 
-{{PAGES}}
+Define search intent, indexable routes, page metadata responsibilities,
+canonical policy, structured data, redirects, robots, and sitemap decisions.
+Never invent a domain, claims, locations, or organization data.
 
-For every route record path, purpose, audience need, primary conversion, section
-order, `routeFile`, `planFile`, and readiness. `pages` is the information
-architecture; do not infer visible navigation from this inventory.
+## Technical decisions
 
-### Required functionality and integrations
+{{TECHNICAL_DECISIONS}}
 
-{{FUNCTIONALITY}}
+Record only decisions the implementation needs: rendering, data/content
+ownership, component boundaries, interactive islands, image policy,
+dependencies, deployment, and integration contracts. Add a separate
+`ARCHITECTURE.md` only if complexity makes this section insufficient.
 
-Name the owner, data involved, user-visible outcome, failure consequence, and
-whether credentials or legal approval are pending.
-
-## Navigation
-
-{{NAVIGATION}}
-
-Define primary links, the single navigation CTA when present, and footer links.
-Every internal destination must exist in the route inventory. Record why an
-indexable route is intentionally absent from navigation. Labels and access
-patterns belong here; visual navigation behavior belongs in `DESIGN.md`.
-
-## Available inputs
-
-{{CONTENT_SOURCES}}
-
-List approved copy, datasets, brand material, media, legal text, references, and subject-matter owners. Link to their authoritative location.
-
-## Constraints
+## Constraints and security
 
 {{CONSTRAINTS}}
 
-Record legal, technical, accessibility, performance, deployment, schedule, privacy, and content restrictions that affect scope.
+Cover legal, privacy, accessibility, performance, security, browser,
+deployment, schedule, and content constraints.
 
-## Explicit non-goals
+## Out of scope
 
 {{NON_GOALS}}
 
-List work intentionally excluded from this phase so it cannot enter through opportunistic implementation.
-
 ## Open decisions
 
-List only unresolved business or scope questions. Include owner, blocking impact, and the latest point when each answer is needed. Never replace missing facts with plausible copy.
+{{OPEN_DECISIONS}}
+
+Keep unresolved facts explicit. Remove all template guidance and placeholders
+when generating the project document.

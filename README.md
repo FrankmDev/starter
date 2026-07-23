@@ -1,159 +1,89 @@
-# Starter personal de Astro
+# Astro starter
 
-Base mínima y reutilizable para comenzar proyectos Astro con arquitectura,
-estilos globales, SEO, imágenes, accesibilidad, documentación para IA y un gate
-de producción ya resueltos.
+Starter estático y mínimo con Astro, TypeScript estricto, Tailwind 4, tokens
+globales, SEO, sitemap, robots, JSON-LD seguro, CSP nativo, accesibilidad base,
+Prettier y CI reproducible.
 
-## Núcleo permanente
+No incluye frameworks cliente, CMS, auth, ecommerce, analytics, consent, i18n,
+theme switch, motion, forms, APIs, base de datos, adapters, observability,
+Playwright ni componentes comerciales. Todo eso se añade solo cuando el proyecto
+lo necesita.
 
-- Astro estático y TypeScript `strictest`.
-- Tailwind CSS 4 mediante su plugin oficial de Vite.
-- Tokens y reglas base únicamente en `src/styles/globals.css`.
-- Sitemap, canonical, robots, Open Graph y JSON-LD.
-- Imágenes responsive con `astro:assets`.
-- Layout, skip link, contenedores, secciones, botones y formularios accesibles.
-- Configuración tipada de páginas, navegación, apariencia, negocio y contenido.
-- Inicialización dirigida por `AGENTS.md`, `PROJECT_START.md` y plantillas
-  documentales.
-- Prettier para Astro y orden estable de utilidades Tailwind.
-- Un único build determinista: formato, validator, diagnósticos, tests unitarios
-  y producción.
+## Crear un proyecto
 
-No incluye Playwright, frameworks cliente, CMS, analítica, ecommerce,
-autenticación, i18n, theme switch, proveedor de formularios, adaptador de
-despliegue, librerías de motion ni componentes comerciales. Se añaden solo
-cuando el proyecto confirma la necesidad.
-
-## Preparar el repositorio como plantilla
-
-Este comando se ejecuta una sola vez:
+Marca este repositorio como template una sola vez:
 
 ```bash
-gh auth login
 gh repo edit FrankmDev/starter --template
 ```
 
-## Crear un proyecto nuevo
-
-Desde la carpeta donde guardas tus proyectos:
+Crea un repositorio nuevo con historial independiente y clónalo:
 
 ```bash
-cd /Users/frnq/Documents/PROJECTS
-
-gh repo create FrankmDev/mi-nuevo-proyecto \
+gh repo create FrankmDev/mi-proyecto \
   --private \
   --template FrankmDev/starter \
   --clone
 
-cd mi-nuevo-proyecto
+cd mi-proyecto
 bun ci
 bun run build
 ```
 
-Cambia `mi-nuevo-proyecto` en ambos lugares. Usa `--public` si el nuevo
-repositorio debe ser público.
-
-El comando crea un repositorio con historial independiente y clona su carpeta
-local. No uses `git clone` directamente sobre el starter para iniciar un
-proyecto: conservaría `origin` apuntando a la plantilla.
-
-Si solo quieres una carpeta local sin crear un repositorio remoto:
+Usa `--public` si corresponde. Para una copia únicamente local:
 
 ```bash
-bun create astro@latest mi-nuevo-proyecto --template FrankmDev/starter
+bun create astro@latest mi-proyecto --template FrankmDev/starter
 ```
 
-## Inicializar la copia
+## Inicializar con IA
 
-Cada copia comienza con `projectConfig.meta.initialized: false`.
+1. Completa el briefing breve de `START_HERE.md`.
+2. Añade una carpeta `references/` solo si tienes referencias visuales.
+3. Pide: `Inicializa este proyecto`.
 
-1. Abre `START_HERE.md`.
-2. Describe el proyecto, páginas, navegación, funcionalidades, contenido y
-   estética.
-3. Añade referencias a `references/` cuando existan.
-4. Envía el briefing a la IA comenzando por:
+La IA completará la configuración runtime, `docs/PROJECT.md`,
+`docs/DESIGN.md`, los tokens globales y únicamente las rutas y capacidades
+confirmadas.
 
-```text
-Inicializa este proyecto.
-```
-
-La IA registra primero los hechos confirmados en `project.config.ts`, genera los
-documentos y planes de ruta, define el sistema visual global, prepara rutas y
-configuración técnica, valida el resultado renderizado y solo entonces marca el
-proyecto como inicializado.
-
-La inicialización prepara la plataforma; no construye automáticamente páginas
-comerciales terminadas.
-
-## Fuentes de verdad
-
-- `AGENTS.md`: reglas permanentes de trabajo para la IA.
-- `PROJECT_START.md`: protocolo de inicialización y ejecución.
-- `project.config.ts`: hechos estructurados y estado.
-- `docs/project/PROJECT.md`: negocio, audiencia, alcance, rutas y navegación.
-- `docs/project/CONTENT.md`: fuentes, voz, mensajes y copy.
-- `docs/project/DESIGN.md`: sistema visual, referencias y tokens.
-- `docs/project/ARCHITECTURE.md`: implementación, datos y dependencias.
-- `docs/project/QA.md`: checks y evidencia de entrega.
-- `docs/project/pages/`: un contrato ejecutable por ruta.
-
-`AGENTS.md` nunca contiene hechos del cliente. Los documentos no deben duplicar
-responsabilidades entre sí.
-
-## Arquitectura
-
-```text
-src/
-├── components/
-│   ├── core/          # SEO, JSON-LD, imágenes y accesibilidad técnica
-│   ├── layout/        # documento y shells compartidos
-│   └── primitives/    # contratos pequeños y neutrales
-├── config/            # sitio, SEO, navegación y copy de sistema
-├── layouts/
-├── lib/               # transformaciones y contratos sin presentación
-├── pages/             # rutas declarativas
-└── styles/
-    └── globals.css    # único tema global
-```
-
-`assets/`, `content/`, `data/`, `sections/` y `ui/` se crean durante la
-inicialización únicamente cuando el proyecto los necesita.
-
-## Comandos
+## Scripts
 
 ```bash
-bun run dev           # desarrollo
-bun run format        # aplica formato
-bun run format:check  # comprueba formato sin escribir
-bun run validate      # configuración, rutas, navegación y documentos
-bun run check         # validate + diagnósticos Astro/TypeScript
-bun run test          # contratos permanentes con el runner de Bun
-bun run build         # format:check + check + test + producción
-bun run qa            # alias del gate completo build
-bun run audit         # seguridad; consulta externa e independiente
-bun run preview       # sirve el build local
+bun run dev
+bun run check
+bun run build
+bun run preview
+bun run format
+bun run format:check
+bun run audit
 ```
 
-## Dependencias permanentes
+`check` valida únicamente la configuración peligrosa y ejecuta los diagnósticos
+de Astro. `build` ejecuta `check` y el build de producción. El formato se
+comprueba en CI, no en cada build local.
 
-- `astro` y `@astrojs/sitemap`.
-- `tailwindcss` y `@tailwindcss/vite`.
-- `typescript`, `@astrojs/check` y `@types/bun`.
-- `prettier`, `prettier-plugin-astro` y
-  `prettier-plugin-tailwindcss`.
+## Estructura mínima
 
-TypeScript permanece en la última versión compatible con la API de
-`astro check`; no se fuerza una major incompatible solo porque exista en el
-registro.
+```text
+docs/                 # PROJECT, DESIGN y sus dos templates
+scripts/              # validator pequeño de configuración runtime
+src/components/       # Container, SEO y JsonLd
+src/layouts/          # BaseLayout
+src/pages/            # home, 404 y robots
+src/styles/           # tokens y reglas globales
+```
 
 ## Mantenimiento
 
+Dependabot revisa dependencias semanalmente. Para mantenimiento manual:
+
 ```bash
 bun outdated
+bun update
+bun run format
 bun run build
 bun run audit
 ```
 
-Actualiza Astro y sus integraciones tras revisar la guía de migración. Confirma
-que la plantilla mantiene `initialized: false` y no copies de vuelta branding,
-rutas comerciales, integraciones o decisiones visuales de un cliente.
+Revisa las migraciones antes de actualizar majors y mantén
+`projectConfig.initialized: false` en la plantilla.
