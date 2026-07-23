@@ -170,3 +170,4 @@ bun run qa
 ```
 
 La plantilla fija Bun 1.3.14 y Node 24.18.0 LTS. Confirma que `projectConfig.meta.initialized` sigue siendo `false`. Nunca copies de vuelta al starter branding, contenido, rutas comerciales, integraciones o decisiones visuales de un cliente.
+# starter
