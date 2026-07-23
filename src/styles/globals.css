@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/*
+ * Neutral seed system. Project initialization replaces the values, not the
+ * semantic names. This file is the only global token and base-rule source.
+ */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-canvas: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-muted: #ededeb;
+  --color-surface-inverse: #171717;
+  --color-ink: #171717;
+  --color-ink-soft: #3d3d3d;
+  --color-ink-inverse: #ffffff;
+  --color-muted: #626262;
+  --color-border: #d8d8d4;
+  --color-border-strong: #a6a6a0;
+  --color-accent: #2457d6;
+  --color-accent-hover: #1c46ad;
+  --color-accent-active: #15398f;
+  --color-accent-contrast: #ffffff;
+  --color-success: #157f3d;
+  --color-success-subtle: #eaf7ee;
+  --color-warning: #8a4b08;
+  --color-warning-subtle: #fff4df;
+  --color-danger: #b42318;
+  --color-danger-subtle: #fff0ee;
+  --color-focus: #2457d6;
+
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem;
+  --text-base--line-height: 1.65;
+  --text-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lg--line-height: 1.55;
+  --text-heading: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+  --text-heading--line-height: 1.2;
+  --text-title: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
+  --text-title--line-height: 1.1;
+  --text-display: clamp(2.25rem, 1.4rem + 4vw, 4.75rem);
+  --text-display--line-height: 1.02;
+
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --leading-heading: 1.15;
+  --leading-body: 1.65;
+
+  --spacing-gutter: clamp(1rem, 3vw, 2.5rem);
+  --spacing-section-compact: clamp(3rem, 6vw, 5rem);
+  --spacing-section: clamp(4.5rem, 9vw, 9rem);
+
+  --container-wide: 90rem;
+  --container-content: 76rem;
+  --container-narrow: 52rem;
+  --container-reading: 70ch;
+
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  --shadow-*: initial;
+  --shadow-none: none;
+  --shadow-subtle: 0 1px 2px rgb(0 0 0 / 0.08);
+  --shadow-raised: 0 12px 32px rgb(0 0 0 / 0.12);
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+:root {
+  --motion-fast: 150ms;
+  --motion-base: 250ms;
+  --motion-slow: 500ms;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 3px;
+}
+
+@layer base {
+  html {
+    min-width: 20rem;
+    color-scheme: light;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow-wrap: break-word;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+  }
+
+  main {
+    isolation: isolate;
+  }
+
+  :where(button, input, optgroup, select, textarea) {
+    color: inherit;
+    font: inherit;
+  }
+
+  :where(button, summary, [role="button"]):not(:disabled) {
+    cursor: pointer;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+  }
+
+  :where(a:not([class])) {
+    color: var(--color-accent);
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+
+  :where(a:not([class])):hover {
+    color: var(--color-accent-hover);
+  }
+
+  :is(p, li, dd) {
+    text-wrap: pretty;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-heading);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--text-display);
+    line-height: var(--text-display--line-height);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  h2 {
+    font-size: var(--text-title);
+    line-height: var(--text-title--line-height);
+  }
+
+  h3 {
+    font-size: var(--text-heading);
+    line-height: var(--text-heading--line-height);
+  }
+
+  p {
+    max-width: var(--container-reading);
+  }
+
+  hr {
+    border-color: var(--color-border);
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    color: var(--color-ink);
+  }
+
+  :target {
+    scroll-margin-block: 6rem;
+  }
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: CanvasText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
