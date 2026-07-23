@@ -1,10 +1,24 @@
+export type ProjectPath = `/${string}`;
+export type ProjectNavigationHref =
+  | ProjectPath
+  | `#${string}`
+  | `https://${string}`
+  | `mailto:${string}`
+  | `tel:${string}`;
+
 export interface ProjectPage {
   name: string;
-  path: `/${string}`;
+  path: ProjectPath;
+  routeFile: `src/pages/${string}`;
   planFile: `docs/project/pages/${string}.md`;
   purpose: string;
   conversion: string;
   sections: string[];
+}
+
+export interface ProjectNavigationItem {
+  label: string;
+  href: ProjectNavigationHref;
 }
 
 export interface ProjectConfig {
@@ -19,7 +33,10 @@ export interface ProjectConfig {
     domain: string;
     language: string;
     locale: string;
-    direction: 'ltr' | 'rtl';
+    direction: "ltr" | "rtl";
+  };
+  appearance: {
+    colorScheme: "light" | "dark" | "light dark";
   };
   business: {
     sector: string;
@@ -55,6 +72,11 @@ export interface ProjectConfig {
     };
   };
   pages: ProjectPage[];
+  navigation: {
+    primary: ProjectNavigationItem[];
+    cta: ProjectNavigationItem | null;
+    footer: ProjectNavigationItem[];
+  };
   functionality: {
     required: string[];
     integrations: string[];
@@ -69,71 +91,80 @@ export interface ProjectConfig {
 }
 
 export const projectConfig = {
-  "meta": {
-    "starterVersion": "2.0.0",
-    "initialized": false,
-    "initializedAt": null
+  meta: {
+    starterVersion: "2.1.0",
+    initialized: false,
+    initializedAt: null,
   },
-  "identity": {
-    "projectName": "",
-    "companyName": "",
-    "domain": "",
-    "language": "es",
-    "locale": "es-ES",
-    "direction": "ltr"
+  identity: {
+    projectName: "",
+    companyName: "",
+    domain: "",
+    language: "es",
+    locale: "es-ES",
+    direction: "ltr",
   },
-  "business": {
-    "sector": "",
-    "summary": "",
-    "audience": "",
-    "primaryGoal": "",
-    "primaryConversion": "",
-    "services": [],
-    "differentiators": []
+  appearance: {
+    colorScheme: "light",
   },
-  "design": {
-    "summary": "",
-    "referenceFiles": [],
-    "layoutDirection": "",
-    "typographyDirection": "",
-    "colorDirection": "",
-    "imageDirection": "",
-    "motionDirection": "",
-    "avoid": []
+  business: {
+    sector: "",
+    summary: "",
+    audience: "",
+    primaryGoal: "",
+    primaryConversion: "",
+    services: [],
+    differentiators: [],
   },
-  "content": {
-    "availableSources": [],
-    "voice": "",
-    "keyMessages": [],
-    "prohibitedClaims": [],
-    "ui": {
-      "skipToContent": "",
-      "foundationStatus": "",
-      "foundationDescription": "",
-      "notFoundTitle": "",
-      "notFoundDescription": "",
-      "returnHome": ""
-    }
+  design: {
+    summary: "",
+    referenceFiles: [],
+    layoutDirection: "",
+    typographyDirection: "",
+    colorDirection: "",
+    imageDirection: "",
+    motionDirection: "",
+    avoid: [],
   },
-  "pages": [
+  content: {
+    availableSources: [],
+    voice: "",
+    keyMessages: [],
+    prohibitedClaims: [],
+    ui: {
+      skipToContent: "",
+      foundationStatus: "",
+      foundationDescription: "",
+      notFoundTitle: "",
+      notFoundDescription: "",
+      returnHome: "",
+    },
+  },
+  pages: [
     {
-      "name": "Home",
-      "path": "/",
-      "planFile": "docs/project/pages/home.md",
-      "purpose": "",
-      "conversion": "",
-      "sections": []
-    }
+      name: "Home",
+      path: "/",
+      routeFile: "src/pages/index.astro",
+      planFile: "docs/project/pages/home.md",
+      purpose: "",
+      conversion: "",
+      sections: [],
+    },
   ],
-  "functionality": {
-    "required": [],
-    "integrations": []
+  navigation: {
+    primary: [],
+    cta: null,
+    footer: [],
   },
-  "constraints": {
-    "legal": [],
-    "technical": [],
-    "accessibility": [],
-    "performance": [],
-    "nonGoals": []
-  }
+  functionality: {
+    required: [],
+    integrations: [],
+  },
+  constraints: {
+    legal: [],
+    technical: [],
+    accessibility: [],
+    performance: [],
+    nonGoals: [],
+  },
 } satisfies ProjectConfig;

@@ -24,7 +24,11 @@ Use this precedence when facts conflict:
 4. current implementation and test evidence;
 5. declared references, limited by `useFor` and `doNotUseFor`.
 
-`AGENTS.md` contains stable operating rules and should not become a project brief. Project facts belong in `project.config.ts`; generated decisions belong in the routed documents.
+`AGENTS.md` contains stable operating rules and must never become a project
+brief. Project facts belong in `project.config.ts`; generated decisions belong
+in exactly one routed document. Keep business and scope out of `DESIGN.md`, keep
+visual decisions out of `PROJECT.md`, and keep implementation ownership out of
+both. Link across documents instead of copying full sections.
 
 When generating a document from `docs/templates/`:
 
@@ -74,7 +78,10 @@ Record confirmed answers in `project.config.ts`. Keep unknown business facts vis
 Before continuing, the configuration must cover as far as the user can confirm:
 
 - identity, sector, concise offer summary, audience, goal, and conversion;
-- route inventory, purpose, conversion, section order, and `planFile` for every page;
+- route inventory, purpose, conversion, section order, `routeFile`, and
+  `planFile` for every page;
+- primary, CTA, and footer navigation independently from the page inventory;
+- supported browser color scheme through `appearance.colorScheme`;
 - functionality and named integrations;
 - visual direction, references, and explicit avoidances;
 - available content, voice, key messages, and prohibited claims;
@@ -106,14 +113,18 @@ A reference never defines the whole site unless its metadata explicitly assigns 
 
 Create or complete these documents from `docs/templates/` without duplicating large blocks:
 
-- `docs/project/PROJECT.md`: product, audience, goals, scope, routes, constraints, and unresolved business facts.
+- `docs/project/PROJECT.md`: product, audience, goals, scope, route purposes,
+  navigation intent, constraints, and unresolved business facts.
 - `docs/project/DESIGN.md`: visual intent, extracted reference principles, tokens, typography, layout, imagery, motion, responsive behavior, exclusions, and visual definition of done.
 - `docs/project/ARCHITECTURE.md`: stack, route/data/component contracts, shared and page-specific boundaries, islands, functionality, SEO, images, and dependency decisions.
 - `docs/project/CONTENT.md`: source inventory, voice, message hierarchy, page content needs, metadata, and missing copy.
 - `docs/project/QA.md`: commands, viewports, interaction cases, accessibility, SEO, performance, visual checks, and release criteria.
 - One file per route in `docs/project/pages/`, using `docs/templates/PAGE.template.md`.
 
-Each page file must define purpose, audience need, primary conversion, narrative order, section responsibilities, content inputs, component candidates, responsive behavior, SEO, states, acceptance criteria, and explicit non-goals.
+Each page file must define its `routeFile`, purpose, audience need, primary
+conversion, narrative order, section responsibilities, content inputs,
+component candidates, responsive behavior, SEO, states, acceptance criteria,
+and explicit non-goals.
 
 Use each page's `planFile` from `project.config.ts`. The page inventory and plan files must be one-to-one: no undeclared plan and no declared route without a plan.
 
@@ -127,6 +138,8 @@ Adapt the single global stylesheet:
 - font assets and `@font-face` declarations when fonts are available and licensed;
 - minimal base rules for document, typography, unclassed links, form inheritance, media, focus, selection, targets, accessibility, print when relevant, and reduced motion;
 - general responsive rules derived from content capacity.
+- complete semantic token values for every scheme declared by
+  `appearance.colorScheme`; do not create a switch unless explicitly required.
 
 Do not create additional global CSS files, Tailwind configuration files, or parallel token sources. Compose components with Tailwind utilities. Add a rule to `globals.css` only when it is genuinely shared or cannot be expressed clearly with utilities.
 
@@ -137,6 +150,8 @@ Do not create finished heroes, service blocks, testimonial blocks, galleries, pr
 Determine and document:
 
 - route inventory and page purpose;
+- the real `routeFile` and unique `planFile` for every route;
+- primary, CTA, and footer navigation separately from the route inventory;
 - narrative and section order for each route;
 - truly shared components and project-specific components;
 - structured local data and content ownership;
@@ -146,6 +161,8 @@ Determine and document:
 - mobile, intermediate, and desktop behavior;
 - technical and on-page SEO strategy;
 - image storage, responsive sizes, priority, alt text, and remote source policy.
+- form fields, validation ownership, submission states, privacy, and recovery
+  whenever a form is required.
 
 Use React only for complex state or a sharply bounded third-party island. Do not use it for static layout. Do not use JavaScript to solve CSS layout.
 
@@ -154,6 +171,7 @@ Use React only for complex state or a sharply bounded third-party island. Do not
 Implement only:
 
 - project configuration;
+- explicit pages, route files, navigation, and browser color scheme;
 - package name aligned with the new repository, using a lowercase npm-safe slug;
 - base styles and generated visual system;
 - SEO defaults, `SEO`, `JsonLd`, canonical handling, sitemap, and robots;
@@ -162,8 +180,14 @@ Implement only:
 - project font configuration;
 - minimal Header and Footer only when needed to validate navigation; mark them as provisional and project-specific;
 - empty routes or honest skeletons that expose page names and implementation status;
+- accessible `Input`, `Textarea`, and `Select` controls for standard form
+  fields; extend them only for a confirmed requirement;
 - project-specific integrations only when explicitly required and justified;
 - project-specific QA criteria and viewport review instructions.
+
+Create `assets/`, `content/`, `data/`, `sections/`, or project-specific `ui/`
+directories only when the initialized project has files that belong there. Do
+not preserve empty architecture through `.gitkeep` files.
 
 Do not automatically build the full site. Initialization ends with a stable implementation platform and documented page plans.
 
@@ -171,11 +195,15 @@ Do not automatically build the full site. Initialization ends with a stable impl
 
 Run in this order:
 
-1. `bun run check`
-2. `bun run build`
-3. Run `bun run audit` when registry access is available; report inability to reach the registry separately from a vulnerability finding.
-4. Start `bun run dev` and inspect the rendered foundation at 390 × 844, 768 × 1024, and 1440 × 1000 with the browser tools available in the current environment.
-5. Also inspect 320 px when text, navigation, forms, or grids are risky.
+1. `bun run build`. This runs formatting verification, project validation,
+   Astro and TypeScript diagnostics, deterministic unit tests, and the
+   production build.
+2. Run `bun run audit` separately when registry access is available; report
+   inability to reach the registry separately from a vulnerability finding.
+3. Start `bun run dev` and inspect the rendered foundation at 390 × 844,
+   768 × 1024, and 1440 × 1000 with the browser tools available in the current
+   environment.
+4. Also inspect 320 px when text, navigation, forms, or grids are risky.
 
 During the rendered review:
 
@@ -185,7 +213,11 @@ During the rendered review:
 - verify one `h1`, essential links, image loading, focus visibility, reduced motion, long content, and 404 behavior;
 - compare observable output with `docs/project/DESIGN.md`.
 
-The permanent starter intentionally does not install browser automation or visual-regression packages. Add such tooling only when the project’s risk and delivery process justify it, then document its commands in `docs/project/QA.md`.
+The permanent starter intentionally does not install browser automation or
+visual-regression packages. Do not add Playwright during generic
+initialization. Add project-specific testing tooling only after an explicit
+requirement, with its dependency and commands documented in
+`ARCHITECTURE.md` and `QA.md`.
 
 If a check fails, fix only the cause introduced or exposed by initialization and rerun the smallest affected set before the full gate.
 
@@ -195,7 +227,9 @@ Only after the required checks pass:
 
 1. Set `meta.initialized` to `true`.
 2. Set `meta.initializedAt` to the current ISO timestamp.
-3. Run `bun run qa` again. This includes the configuration/document validator, Astro diagnostics, and the production build.
+3. Run `bun run build` again. This includes formatting verification, the
+   configuration/document validator, Astro diagnostics, unit tests, and the
+   production build.
 4. Return:
    - generated structure;
    - main decisions;

@@ -35,7 +35,7 @@ Order the core proposition, supporting benefits, proof, objections, trust inform
 Create a ledger with:
 
 | Claim | Evidence/source | Approval | Allowed routes | Notes |
-| --- | --- | --- | --- | --- |
+| ----- | --------------- | -------- | -------------- | ----- |
 
 List unsupported or prohibited claims separately:
 
@@ -47,7 +47,11 @@ Define preferred terms, banned terms, product/service naming, acronyms, translat
 
 ## System interface copy
 
-Define the localized skip-link label, foundation status and description, 404 title and description, and return-home label stored in `projectConfig.content.ui`. Add form or integration state labels only when those features exist.
+Define the localized skip-link label, foundation status and description, 404
+title and description, and return-home label stored in
+`projectConfig.content.ui`. Treat labels in `projectConfig.navigation` as
+approved interface copy. Add form or integration state labels only when those
+features exist.
 
 ## Page content matrix
 
@@ -56,7 +60,7 @@ Define the localized skip-link label, foundation status and description, 404 tit
 For each route record:
 
 | Route/section | Required copy | Required media/data | Source/owner | Status | Blocking gap |
-| --- | --- | --- | --- | --- | --- |
+| ------------- | ------------- | ------------------- | ------------ | ------ | ------------ |
 
 Include navigation labels, headings, body copy, actions, empty/error/success states, image alt inputs, and legal or trust content.
 

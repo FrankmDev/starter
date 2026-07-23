@@ -5,12 +5,18 @@
 ## Required commands
 
 ```bash
-bun run validate
-bun run check
 bun run build
 ```
 
-Run `bun run audit` when registry access is available; GitHub Actions runs it on every push and pull request. Add only project-specific commands that are installed, stable, and justified.
+`bun run build` runs formatting verification, the project validator, Astro and
+TypeScript diagnostics, deterministic unit tests, and the production build. Use
+`bun run format`, `bun run validate`, `bun run check`, and `bun run test` only
+as focused diagnosis commands.
+
+Run `bun run audit` separately when registry access is available. GitHub Actions
+reports it as an independent security job so advisory infrastructure cannot be
+confused with deterministic build quality. Add only project-specific commands
+that are installed, stable, and justified.
 
 ## Test environments
 
@@ -21,7 +27,7 @@ Record Bun/Node versions, browsers, deployment preview when available, environme
 {{PAGES}}
 
 | Route | Default | Empty/partial | Error | No JS | Index state | Owner |
-| --- | --- | --- | --- | --- | --- | --- |
+| ----- | ------- | ------------- | ----- | ----- | ----------- | ----- |
 
 Mark non-applicable states explicitly.
 
@@ -61,13 +67,17 @@ No unjustified hydration, correctly prioritized images and fonts, stable dimensi
 Record approved budgets and measurement tools:
 
 | Route/state | Metric/budget | Tool | Expected | Result |
-| --- | --- | --- | --- | --- |
+| ----------- | ------------- | ---- | -------- | ------ |
 
 ## Release gate
 
-All required commands, route states, viewports, functionality, accessibility, content, SEO, and performance checks must pass. Every exception needs severity, evidence, owner, and explicit acceptance.
+The complete `bun run build` gate, route states, viewports, functionality,
+accessibility, content, SEO, and performance checks must pass. Security audit
+findings are release-blocking; registry availability failures are reported
+separately. Every exception needs severity, evidence, owner, and explicit
+acceptance.
 
 ## Validation record
 
 | Date | Commit/build | Commands | Routes/viewports | Result | Limitations/owner |
-| --- | --- | --- | --- | --- | --- |
+| ---- | ------------ | -------- | ---------------- | ------ | ----------------- |

@@ -7,5 +7,5 @@ export type JsonLdValue =
   | { [key: string]: JsonLdValue };
 
 export function serializeJsonLd(value: JsonLdValue): string {
-  return JSON.stringify(value).replaceAll('<', '\\u003c');
+  return JSON.stringify(value).replaceAll("<", "\\u003c");
 }

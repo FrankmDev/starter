@@ -1,11 +1,11 @@
-import { projectConfig } from '../../project.config';
+import {
+  projectConfig,
+  type ProjectNavigationItem,
+} from "../../project.config";
 
-export interface NavigationItem {
-  label: string;
-  href: `/${string}`;
-}
-
-export const primaryNavigation: NavigationItem[] = projectConfig.pages.map((page) => ({
-  label: page.name,
-  href: page.path,
-}));
+export const primaryNavigation: readonly ProjectNavigationItem[] =
+  projectConfig.navigation.primary;
+export const navigationCta: ProjectNavigationItem | null =
+  projectConfig.navigation.cta;
+export const footerNavigation: readonly ProjectNavigationItem[] =
+  projectConfig.navigation.footer;

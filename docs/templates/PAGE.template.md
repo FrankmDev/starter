@@ -3,6 +3,7 @@
 # {{PAGE_NAME}} — Page plan
 
 - Path: `{{PAGE_PATH}}`
+- Route file: `{{PAGE_ROUTE_FILE}}`
 - Purpose: {{PAGE_PURPOSE}}
 - Primary conversion: {{PAGE_CONVERSION}}
 - Plan file: `{{PAGE_PLAN_FILE}}`
@@ -23,7 +24,7 @@ Define observable completion for the user and the business. State what this page
 Use one row per section:
 
 | Order | Section | Responsibility | Required content/evidence | Primary action | Semantic heading | Data/source |
-| --- | --- | --- | --- | --- | --- | --- |
+| ----- | ------- | -------------- | ------------------------- | -------------- | ---------------- | ----------- |
 
 Explain why each section follows the previous one. Remove redundant sections that do not change understanding, trust, or action.
 
@@ -34,7 +35,7 @@ Define the single `h1`, section headings, landmarks, navigation relationship, an
 ## Component and data plan
 
 | Section | Component candidate | Shared/local | Props/data contract | States | Source owner |
-| --- | --- | --- | --- | --- | --- |
+| ------- | ------------------- | ------------ | ------------------- | ------ | ------------ |
 
 Keep page markup declarative. Specify mappings outside visual components and reuse only contracts already proven by consumers.
 
@@ -45,7 +46,7 @@ Define native behavior first. For every interaction specify trigger, keyboard be
 ## Responsive behavior
 
 | Section | Mobile | Intermediate | Desktop | Long-content/overflow risk |
-| --- | --- | --- | --- | --- |
+| ------- | ------ | ------------ | ------- | -------------------------- |
 
 Define order, grid changes, content measures, media crop/focal behavior, targets, labels, zoom, and 320 px behavior. Avoid duplicate mobile markup.
 
@@ -69,7 +70,8 @@ State image/font priority, expected client JavaScript, third-party work, layout-
 
 ### Allowed files
 
-List the exact files this page pass may create or change and why.
+Start with the declared `routeFile`. List the exact files this page pass may
+create or change and why.
 
 ### Prohibited files
 

@@ -1,173 +1,159 @@
 # Starter personal de Astro
 
-Base reutilizable y deliberadamente mínima para comenzar proyectos Astro sin volver a decidir estructura, estilos globales, SEO, imágenes, accesibilidad, documentación y validación.
+Base mínima y reutilizable para comenzar proyectos Astro con arquitectura,
+estilos globales, SEO, imágenes, accesibilidad, documentación para IA y un gate
+de producción ya resueltos.
 
-## Qué incluye
+## Núcleo permanente
 
-- Astro estático y TypeScript en modo `strictest`.
+- Astro estático y TypeScript `strictest`.
 - Tailwind CSS 4 mediante su plugin oficial de Vite.
-- Un único sistema de tokens y reglas globales en `src/styles/globals.css`.
+- Tokens y reglas base únicamente en `src/styles/globals.css`.
 - Sitemap, canonical, robots, Open Graph y JSON-LD.
 - Imágenes responsive con `astro:assets`.
-- Layout base, skip link y primitivas neutrales.
-- Configuración central en `project.config.ts`.
-- Onboarding guiado para agentes mediante `AGENTS.md` y `PROJECT_START.md`.
-- Gate local y de GitHub Actions con `check` + `build`.
+- Layout, skip link, contenedores, secciones, botones y formularios accesibles.
+- Configuración tipada de páginas, navegación, apariencia, negocio y contenido.
+- Inicialización dirigida por `AGENTS.md`, `PROJECT_START.md` y plantillas
+  documentales.
+- Prettier para Astro y orden estable de utilidades Tailwind.
+- Un único build determinista: formato, validator, diagnósticos, tests unitarios
+  y producción.
 
-No incluye React, CMS, analítica, ecommerce, proveedor de formularios, adaptador de despliegue, animaciones ni automatización de navegador. Se añaden únicamente cuando un proyecto los necesita.
+No incluye Playwright, frameworks cliente, CMS, analítica, ecommerce,
+autenticación, i18n, theme switch, proveedor de formularios, adaptador de
+despliegue, librerías de motion ni componentes comerciales. Se añaden solo
+cuando el proyecto confirma la necesidad.
 
-## Publicar este starter en GitHub por primera vez
+## Preparar el repositorio como plantilla
 
-### Opción recomendada: GitHub CLI
-
-Instala [GitHub CLI](https://cli.github.com/), inicia sesión y ejecuta desde esta carpeta:
+Este comando se ejecuta una sola vez:
 
 ```bash
-git init -b main
-git add .
-git commit -m "chore: prepare Astro starter"
 gh auth login
-gh repo create TU_USUARIO/frnq-astro-starter --private --source=. --remote=origin --push
-gh repo edit TU_USUARIO/frnq-astro-starter --template
+gh repo edit FrankmDev/starter --template
 ```
 
-Sustituye `TU_USUARIO` por tu usuario de GitHub. El último comando marca el repositorio como plantilla.
+## Crear un proyecto nuevo
 
-### Opción visual en github.com
-
-1. Crea un repositorio vacío llamado `frnq-astro-starter`.
-2. Sube esta carpeta siguiendo los comandos que GitHub muestra para un repositorio existente.
-3. Abre `Settings`.
-4. En `General`, activa `Template repository`.
-
-No uses un fork como base de cada cliente. Un repositorio creado desde una plantilla comienza con historial independiente.
-
-## Crear y clonar un proyecto nuevo
-
-Esta es la forma más directa. Desde la carpeta donde guardas tus proyectos:
+Desde la carpeta donde guardas tus proyectos:
 
 ```bash
-gh repo create nuevo-proyecto \
+cd /Users/frnq/Documents/PROJECTS
+
+gh repo create FrankmDev/mi-nuevo-proyecto \
   --private \
-  --template TU_USUARIO/frnq-astro-starter \
+  --template FrankmDev/starter \
   --clone
 
-cd nuevo-proyecto
-bun install
+cd mi-nuevo-proyecto
+bun ci
+bun run build
 ```
 
-Ese único comando crea `nuevo-proyecto` en GitHub y clona una carpeta local nueva basada en el starter.
+Cambia `mi-nuevo-proyecto` en ambos lugares. Usa `--public` si el nuevo
+repositorio debe ser público.
 
-También puedes hacerlo desde la web:
+El comando crea un repositorio con historial independiente y clona su carpeta
+local. No uses `git clone` directamente sobre el starter para iniciar un
+proyecto: conservaría `origin` apuntando a la plantilla.
 
-1. Abre el repositorio starter.
-2. Pulsa `Use this template` → `Create a new repository`.
-3. Escribe el nombre y crea el repositorio.
-4. Clónalo con `gh repo clone TU_USUARIO/nuevo-proyecto`.
-5. Entra en la carpeta y ejecuta `bun install`.
-
-Si solo quieres una carpeta local y el starter es accesible desde GitHub:
+Si solo quieres una carpeta local sin crear un repositorio remoto:
 
 ```bash
-bun create astro@latest nuevo-proyecto --template TU_USUARIO/frnq-astro-starter
+bun create astro@latest mi-nuevo-proyecto --template FrankmDev/starter
 ```
 
-Esta última opción no crea automáticamente un repositorio remoto nuevo. Para starters privados, usa preferentemente el flujo con `gh repo create`.
+## Inicializar la copia
 
-## Inicializar la web
+Cada copia comienza con `projectConfig.meta.initialized: false`.
 
-Cada copia comienza con `projectConfig.meta.initialized: false`. No cambies ese valor a mano.
-
-1. Abre [START_HERE.md](START_HERE.md) y copia su briefing.
-2. Describe negocio, páginas/secciones, funcionalidades, contenido y estética; puedes dejar vacíos los datos desconocidos.
-3. Añade referencias visuales a `references/` y crea `references/references.json` a partir del ejemplo cuando existan.
-4. Envía el briefing al agente empezando por:
+1. Abre `START_HERE.md`.
+2. Describe el proyecto, páginas, navegación, funcionalidades, contenido y
+   estética.
+3. Añade referencias a `references/` cuando existan.
+4. Envía el briefing a la IA comenzando por:
 
 ```text
-Inicializa el proyecto.
+Inicializa este proyecto.
 ```
 
-El agente escribe los hechos confirmados en `project.config.ts`; tú no necesitas editar los documentos. Después genera el contexto de negocio, contenido, diseño, arquitectura, QA y un plan por página; define todos los tokens globales; prepara la base técnica; valida configuración, tipos, build y viewports; y finalmente marca el proyecto como inicializado. No construye una web comercial completa durante este paso.
+La IA registra primero los hechos confirmados en `project.config.ts`, genera los
+documentos y planes de ruta, define el sistema visual global, prepara rutas y
+configuración técnica, valida el resultado renderizado y solo entonces marca el
+proyecto como inicializado.
+
+La inicialización prepara la plataforma; no construye automáticamente páginas
+comerciales terminadas.
+
+## Fuentes de verdad
+
+- `AGENTS.md`: reglas permanentes de trabajo para la IA.
+- `PROJECT_START.md`: protocolo de inicialización y ejecución.
+- `project.config.ts`: hechos estructurados y estado.
+- `docs/project/PROJECT.md`: negocio, audiencia, alcance, rutas y navegación.
+- `docs/project/CONTENT.md`: fuentes, voz, mensajes y copy.
+- `docs/project/DESIGN.md`: sistema visual, referencias y tokens.
+- `docs/project/ARCHITECTURE.md`: implementación, datos y dependencias.
+- `docs/project/QA.md`: checks y evidencia de entrega.
+- `docs/project/pages/`: un contrato ejecutable por ruta.
+
+`AGENTS.md` nunca contiene hechos del cliente. Los documentos no deben duplicar
+responsabilidades entre sí.
 
 ## Arquitectura
 
 ```text
 src/
-├── assets/              # fuentes, iconos e imágenes procesables
 ├── components/
-│   ├── core/            # SEO, JSON-LD, imágenes y accesibilidad técnica
-│   ├── layout/          # shells compartidos
-│   ├── primitives/      # contratos UI pequeños y neutrales
-│   ├── sections/        # secciones específicas del proyecto
-│   └── ui/              # UI específica reutilizada
-├── config/              # sitio, SEO y navegación
-├── content/             # colecciones de contenido cuando existan
-├── data/                # datos locales tipados
-├── layouts/             # documento y layouts de ruta
-├── lib/                 # transformaciones e integraciones
-├── pages/               # rutas declarativas
+│   ├── core/          # SEO, JSON-LD, imágenes y accesibilidad técnica
+│   ├── layout/        # documento y shells compartidos
+│   └── primitives/    # contratos pequeños y neutrales
+├── config/            # sitio, SEO, navegación y copy de sistema
+├── layouts/
+├── lib/               # transformaciones y contratos sin presentación
+├── pages/             # rutas declarativas
 └── styles/
-    └── globals.css      # único tema global
+    └── globals.css    # único tema global
 ```
 
-Las páginas coordinan datos, SEO y orden. Los componentes renderizan. `data/` y `lib/` son dueños del contenido estructurado y las transformaciones. El JavaScript de cliente se reserva para interacción real.
-
-## Estilos
-
-`src/styles/globals.css` contiene:
-
-- `@import "tailwindcss"`;
-- tokens semánticos en `@theme`;
-- variables compartidas que no encajan en namespaces de Tailwind;
-- base tipográfica y de accesibilidad;
-- comportamiento de movimiento reducido.
-
-Durante la inicialización se sustituyen los tokens neutrales por el sistema visual del proyecto. Los componentes se componen con utilidades Tailwind; no se crean hojas CSS paralelas ni tokens con nombres de marca.
-
-## Documentación de proyecto
-
-- `docs/project/PROJECT.md`: negocio, audiencia, alcance y rutas.
-- `docs/project/DESIGN.md`: sistema visual y referencias.
-- `docs/project/ARCHITECTURE.md`: límites, datos, componentes e integraciones.
-- `docs/project/CONTENT.md`: voz, fuentes, inventario y copy pendiente.
-- `docs/project/QA.md`: checks y criterios de entrega.
-- `docs/project/pages/`: un plan ejecutable por ruta.
-
-`AGENTS.md` contiene reglas permanentes y rutas de contexto. No se reescribe con el briefing de cada cliente: los hechos variables viven en `project.config.ts` y en estos documentos, evitando duplicación y contexto innecesario.
+`assets/`, `content/`, `data/`, `sections/` y `ui/` se crean durante la
+inicialización únicamente cuando el proyecto los necesita.
 
 ## Comandos
 
 ```bash
-bun run dev       # desarrollo
-bun run sync      # regenera tipos después de cambiar integraciones
-bun run validate  # coherencia de configuración y documentos
-bun run audit     # vulnerabilidades; requiere acceso al registro
-bun run check     # validate + diagnósticos Astro y TypeScript
-bun run build     # build de producción
-bun run qa        # check + build
-bun run preview   # sirve el build localmente
+bun run dev           # desarrollo
+bun run format        # aplica formato
+bun run format:check  # comprueba formato sin escribir
+bun run validate      # configuración, rutas, navegación y documentos
+bun run check         # validate + diagnósticos Astro/TypeScript
+bun run test          # contratos permanentes con el runner de Bun
+bun run build         # format:check + check + test + producción
+bun run qa            # alias del gate completo build
+bun run audit         # seguridad; consulta externa e independiente
+bun run preview       # sirve el build local
 ```
 
 ## Dependencias permanentes
 
-- `astro`: framework.
-- `@astrojs/sitemap`: sitemap oficial.
-- `tailwindcss` y `@tailwindcss/vite`: sistema visual sin configuración paralela.
-- `typescript` y `@astrojs/check`: contratos y validación.
+- `astro` y `@astrojs/sitemap`.
+- `tailwindcss` y `@tailwindcss/vite`.
+- `typescript`, `@astrojs/check` y `@types/bun`.
+- `prettier`, `prettier-plugin-astro` y
+  `prettier-plugin-tailwindcss`.
 
-Toda dependencia adicional debe tener una necesidad concreta, coste de cliente conocido y una razón documentada.
+TypeScript permanece en la última versión compatible con la API de
+`astro check`; no se fuerza una major incompatible solo porque exista en el
+registro.
 
-TypeScript se mantiene en 6.0.3 aunque npm publique 7.x: la versión nativa 7 todavía no expone la API programática que necesita `astro check`. Es la versión más reciente compatible, no una dependencia olvidada.
-
-## Mantenimiento del starter
-
-Actualiza Astro y sus integraciones oficiales juntos, revisa la guía de migración y ejecuta:
+## Mantenimiento
 
 ```bash
 bun outdated
-# Actualiza solo las versiones compatibles que hayas revisado.
-bun run qa
+bun run build
+bun run audit
 ```
 
-La plantilla fija Bun 1.3.14 y Node 24.18.0 LTS. Confirma que `projectConfig.meta.initialized` sigue siendo `false`. Nunca copies de vuelta al starter branding, contenido, rutas comerciales, integraciones o decisiones visuales de un cliente.
-# starter
+Actualiza Astro y sus integraciones tras revisar la guía de migración. Confirma
+que la plantilla mantiene `initialized: false` y no copies de vuelta branding,
+rutas comerciales, integraciones o decisiones visuales de un cliente.

@@ -1,6 +1,0 @@
----
-description: Run focused and release QA
-alwaysApply: false
----
-
-Read `docs/project/QA.md`. Run `bun run qa` plus project-specific checks in proportion to risk. Inspect the real interface at required routes, states, and viewports. Report commands, routes, states, viewports, failures, and limitations.

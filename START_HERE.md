@@ -21,6 +21,9 @@ Negocio
 Estructura
 - Páginas necesarias:
 - Secciones deseadas por página y su orden:
+- Navegación principal:
+- CTA de navegación:
+- Enlaces de footer:
 - Funcionalidades:
 - Integraciones confirmadas:
 
@@ -34,6 +37,7 @@ Estética
 - Dirección visual:
 - Tipografías o sensación tipográfica:
 - Colores o sensación cromática:
+- Esquema del navegador: light, dark o ambos:
 - Uso de imágenes:
 - Movimiento:
 - Qué evitar:
@@ -54,7 +58,8 @@ Después generará:
 - contexto de proyecto, contenido, diseño, arquitectura y QA;
 - un plan ejecutable por cada ruta;
 - el sistema completo de tokens globales en `src/styles/globals.css`;
-- configuración de sitio, SEO, imágenes, robots y sitemap;
+- configuración separada de páginas, navegación, apariencia, sitio, SEO,
+  imágenes, robots y sitemap;
 - la base técnica y las dependencias justificadas;
 - una validación local y renderizada.
 

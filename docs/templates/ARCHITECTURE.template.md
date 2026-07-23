@@ -11,13 +11,16 @@ Define rendering mode, deployment target when known, runtime assumptions, suppor
 ## Decision ledger
 
 | Decision | Requirement | Chosen approach | Rejected alternative | Client/runtime cost | Revisit trigger |
-| --- | --- | --- | --- | --- | --- |
+| -------- | ----------- | --------------- | -------------------- | ------------------- | --------------- |
 
 ## Route contracts
 
 {{PAGES}}
 
-For every route define path, source data, SEO ownership, layout, section order, states, prerender behavior, and its `planFile`.
+For every route define path, `routeFile`, source data, SEO ownership, layout,
+states, prerender behavior, and its `planFile`. Section narrative stays in the
+route plan. Navigation is configured independently and must not be generated
+from the full route inventory.
 
 ## Responsibility boundaries
 
@@ -36,7 +39,7 @@ Document any project-specific exception.
 ## Component map
 
 | Component | Responsibility | Inputs/outputs | States | Direct consumers | Shared or local |
-| --- | --- | --- | --- | --- | --- |
+| --------- | -------------- | -------------- | ------ | ---------------- | --------------- |
 
 Do not create a component because markup merely looks similar. Record the real reuse, state, semantic, accessibility, or integration contract.
 
@@ -45,7 +48,7 @@ Do not create a component because markup merely looks similar. Record the real r
 For every data source define:
 
 | Source | Owner | Validation/schema | Transform | Consumer | Cache/freshness | Failure fallback |
-| --- | --- | --- | --- | --- | --- | --- |
+| ------ | ----- | ----------------- | --------- | -------- | --------------- | ---------------- |
 
 Describe the direction from source → validation → mapping → page → component. Define empty, loading, partial, stale, error, and unavailable states where applicable.
 
@@ -69,6 +72,14 @@ Define title/description ownership, canonical rules, trailing slash policy, site
 
 Define local versus remote policy, allowed remote hosts, responsive widths and `sizes`, priority, dimensions, aspect ratios, focal behavior, formats, alt ownership, font licenses, subsets, preload rules, and fallback stacks.
 
+## Forms and validation
+
+Use the provided `Input`, `Textarea`, and `Select` primitives for standard
+controls. Define field names, native types, autocomplete tokens, client and
+server validation ownership, help and error copy, submission states, spam
+protection, privacy, and recovery. Add a new control only when native elements
+and the existing accessible contract cannot represent the requirement.
+
 ## Security and privacy
 
 Record secret boundaries, public environment variables, user data, consent, third parties, sanitization, CSP needs, external links, logging, and legal dependencies. No credential belongs in source or project docs.
@@ -76,7 +87,7 @@ Record secret boundaries, public environment variables, user data, consent, thir
 ## Dependency ledger
 
 | Package/integration | Requirement | Build/client impact | Why platform/Astro is insufficient | Removal path |
-| --- | --- | --- | --- | --- |
+| ------------------- | ----------- | ------------------- | ---------------------------------- | ------------ |
 
 Core packages belong here too. A dependency without a concrete requirement must not be installed.
 

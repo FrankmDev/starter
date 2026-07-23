@@ -1,13 +1,20 @@
 ---
-import Button from '@/components/primitives/Button.astro';
-import Container from '@/components/primitives/Container.astro';
-import Section from '@/components/primitives/Section.astro';
-import { uiText } from '@/config/ui';
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from "@/components/primitives/Button.astro";
+import Container from "@/components/primitives/Container.astro";
+import Section from "@/components/primitives/Section.astro";
+import { uiText } from "@/config/ui";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title={uiText.notFoundTitle} description={uiText.notFoundDescription} noindex>
-  <Section class="grid min-h-svh items-center" aria-labelledby="not-found-title">
+<BaseLayout
+  title={uiText.notFoundTitle}
+  description={uiText.notFoundDescription}
+  noindex
+>
+  <Section
+    class="grid min-h-svh items-center"
+    aria-labelledby="not-found-title"
+  >
     <Container size="narrow">
       <div class="space-y-6">
         <p class="font-mono text-lg text-muted" aria-hidden="true">404</p>

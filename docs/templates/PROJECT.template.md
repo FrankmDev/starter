@@ -46,13 +46,25 @@ Distinguish a claim from its approved evidence. Mark missing proof explicitly.
 
 {{PAGES}}
 
-For every route record path, purpose, audience need, primary conversion, section order, plan file, and readiness.
+For every route record path, purpose, audience need, primary conversion, section
+order, `routeFile`, `planFile`, and readiness. `pages` is the information
+architecture; do not infer visible navigation from this inventory.
 
 ### Required functionality and integrations
 
 {{FUNCTIONALITY}}
 
-Name the owner, data involved, user-visible outcome, failure consequence, and whether credentials or legal approval are pending.
+Name the owner, data involved, user-visible outcome, failure consequence, and
+whether credentials or legal approval are pending.
+
+## Navigation
+
+{{NAVIGATION}}
+
+Define primary links, the single navigation CTA when present, and footer links.
+Every internal destination must exist in the route inventory. Record why an
+indexable route is intentionally absent from navigation. Labels and access
+patterns belong here; visual navigation behavior belongs in `DESIGN.md`.
 
 ## Available inputs
 

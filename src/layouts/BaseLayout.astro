@@ -1,12 +1,12 @@
 ---
-import JsonLd from '@/components/core/JsonLd.astro';
-import SEO from '@/components/core/SEO.astro';
-import SkipLink from '@/components/core/SkipLink.astro';
-import PageShell from '@/components/layout/PageShell.astro';
-import { siteConfig } from '@/config/site';
-import type { JsonLdValue } from '@/lib/seo/jsonLd';
-import { projectConfig } from '../../project.config';
-import '@/styles/globals.css';
+import JsonLd from "@/components/core/JsonLd.astro";
+import SEO from "@/components/core/SEO.astro";
+import SkipLink from "@/components/core/SkipLink.astro";
+import PageShell from "@/components/layout/PageShell.astro";
+import { siteConfig } from "@/config/site";
+import type { JsonLdValue } from "@/lib/seo/jsonLd";
+import { projectConfig } from "../../project.config";
+import "@/styles/globals.css";
 
 interface Props {
   title?: string;
@@ -14,7 +14,7 @@ interface Props {
   canonical?: string;
   image?: string;
   imageAlt?: string;
-  type?: 'website' | 'article';
+  type?: "website" | "article";
   noindex?: boolean;
   schema?: JsonLdValue;
 }
@@ -30,9 +30,12 @@ const {
 <html lang={siteConfig.language} dir={siteConfig.direction}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <meta name="generator" content={Astro.generator} />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content={projectConfig.appearance.colorScheme} />
     <SEO {...seoProps} noindex={noindex} />
     {schema && <JsonLd data={schema} />}
     <slot name="head" />
