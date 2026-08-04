@@ -14,11 +14,21 @@ export default defineConfig({
       }
     : {}),
   compressHTML: true,
+  image: {
+    responsiveStyles: true,
+  },
   markdown: {
     syntaxHighlight: false,
   },
   security: {
-    csp: true,
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "object-src 'none'",
+      ],
+    },
   },
   vite: {
     plugins: [tailwindcss()],

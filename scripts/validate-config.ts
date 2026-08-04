@@ -17,13 +17,16 @@ if (projectConfig.initialized) {
   if (site.url.trim()) {
     try {
       const url = new URL(site.url);
-      const isHttp = url.protocol === "https:" || url.protocol === "http:";
       const isPlaceholder =
         url.hostname === "example.com" || url.hostname.endsWith(".example.com");
       const hasPath = url.pathname !== "/" || url.search || url.hash;
+      const hasCredentials = Boolean(url.username || url.password);
+      const hasCustomPort = Boolean(url.port);
 
-      if (!isHttp) errors.push("site.url must use http or https");
+      if (url.protocol !== "https:") errors.push("site.url must use https");
       if (isPlaceholder) errors.push("site.url must not use example.com");
+      if (hasCredentials) errors.push("site.url must not include credentials");
+      if (hasCustomPort) errors.push("site.url must not include a custom port");
       if (hasPath) {
         errors.push("site.url must be an origin without path, query, or hash");
       }

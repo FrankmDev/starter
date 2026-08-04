@@ -12,11 +12,15 @@ Use this protocol only while `projectConfig.initialized === false`.
    `src/styles/globals.css`.
 8. Create only the routes and folders the confirmed project requires.
 9. Add only confirmed functionality, integrations, and dependencies.
-10. Run `bun run format`, `bun run format:check`, and `bun run build`; run
+10. Keep the default static output. Do not add an adapter or deployment config
+    unless a confirmed on-demand requirement needs it.
+11. Put optimizable local media in `src/assets/`; use `public/` only for files
+    that must be copied unchanged. Do not create either folder while empty.
+12. Run `bun run format`, `bun run format:check`, and `bun run build`; run
     `bun run audit` when registry access is available.
-11. Inspect the rendered result when the work has a visual or interactive
+13. Inspect the rendered result when the work has a visual or interactive
     outcome.
-12. Set `projectConfig.initialized` to `true` only after the checks pass.
+14. Set `projectConfig.initialized` to `true` only after the checks pass.
 
 Keep each decision in one place: product, content, routes, functionality, SEO,
 constraints, and technical decisions belong in `PROJECT.md`; visual decisions

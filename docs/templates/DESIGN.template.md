@@ -68,7 +68,7 @@ seed only when this project needs more roles.
 
 | Category | Minimum roles                                                              |
 | -------- | -------------------------------------------------------------------------- |
-| Color    | canvas, surface, ink, muted, border, accent, focus                         |
+| Color    | canvas, surface, ink, muted, border, accent, on-accent, focus              |
 | Type     | font-sans, font-display, text-base, text-heading, text-title, text-display |
 | Space    | gutter, section                                                            |
 | Layout   | container-content, container-reading                                       |

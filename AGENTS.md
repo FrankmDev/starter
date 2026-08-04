@@ -7,6 +7,9 @@
   `docs/DESIGN.md` for visual decisions.
 - Use Astro, semantic HTML, static rendering, and native browser behavior by
   default.
+- A static Vercel deployment needs neither an adapter nor `vercel.json`. Add an
+  adapter only when confirmed on-demand rendering requires one; never add
+  hosting configuration speculatively.
 - Add the minimum client JavaScript required by real interaction. Add
   React/Vue/Svelte only when a bounded interactive need justifies it.
 - Use Tailwind utilities for composition. Keep global tokens and base rules in
@@ -25,8 +28,14 @@
 - Never invent claims, prices, policies, certifications, legal copy,
   credentials, IDs, endpoints, or business data.
 - Do not add dependencies without a current, concrete need.
+- Before adding a dependency, verify that Astro, Tailwind, the platform, or a
+  small local module cannot satisfy the requirement. Remove packages that no
+  longer have a real consumer.
 - Do not create speculative abstractions, opportunistic refactors, empty
   folders, or infrastructure before the project needs them.
+- Work directly on `main`. Do not create branches, worktrees, or pull requests
+  unless the user explicitly requests them. When asked to publish changes, push
+  `main` to `origin/main`.
 - Run checks proportional to the change and `bun run build` after structural or
   release-relevant changes.
 
