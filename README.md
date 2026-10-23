@@ -98,6 +98,15 @@ src/
 `public/` se crea solo para archivos que deban copiarse sin procesamiento. No se
 mantienen carpetas vacías ni arquitectura especulativa.
 
+## Extensiones y publicación
+
+- [EXTENSIONS.md](docs/EXTENSIONS.md): decisiones para blog, ecommerce, i18n, portales y SSR sin inflar la plantilla.
+- [RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md): checklist de calidad antes de lanzar cada proyecto.
+- `bun run test:config`: casos positivos y negativos para evitar inicializaciones inseguras.
+- `bun run verify`: comprobación de formato, configuración, tests, tipos y build.
+
+**Importante:** el rango `^7.1.6` permite Astro 7.4, pero `bun.lock` sigue fijando la versión resuelta anterior. Actualiza con Bun y confirma el build antes de subir el lockfile. Este cambio de configuración no afirma que las dependencias ya estén actualizadas.
+
 ## Dependencias
 
 Solo hay nueve dependencias directas, agrupadas por una responsabilidad real:
@@ -124,6 +133,8 @@ bun run preview       # sirve el resultado de dist/
 bun run format        # aplica Prettier y ordena clases Tailwind
 bun run format:check  # comprueba formato sin escribir
 bun run audit         # falla ante advisories de severidad alta
+bun run test:config   # pruebas del contrato de inicialización
+bun run verify        # formato, configuración, tipos y build
 ```
 
 ## Reglas de implementación
@@ -150,13 +161,13 @@ manual e intencional:
 ```bash
 bun outdated
 bun update
+bun ci
 bun run format
-bun run format:check
-bun run build
+bun run verify
 bun run audit
 git push origin main
 ```
 
-No actualices un major sin revisar su guía de migración. TypeScript se mantiene en
+Actualiza con Bun para regenerar `bun.lock` junto con `package.json`; nunca edites hashes del lockfile a mano. No actualices un major sin revisar su guía de migración. TypeScript se mantiene en
 la última versión compatible con `@astrojs/check`. En este repositorio plantilla,
 mantén `projectConfig.initialized: false`.

@@ -23,7 +23,8 @@ export function validateProjectConfig(config: ProjectConfig): string[] {
         host === "localhost" ||
         host.endsWith(".localhost") ||
         host.endsWith(".test") ||
-        host.endsWith(".invalid");
+        host.endsWith(".invalid") ||
+        host.endsWith(".example");
       if (url.protocol !== "https:") errors.push("site.url must use https");
       if (reserved) errors.push("site.url must use a production domain");
       if (url.username || url.password) errors.push("site.url must not contain credentials");

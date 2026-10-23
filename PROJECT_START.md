@@ -16,9 +16,9 @@ Use this protocol only while `projectConfig.initialized === false`.
     unless a confirmed on-demand requirement needs it.
 11. Put optimizable local media in `src/assets/`; use `public/` only for files
     that must be copied unchanged. Do not create either folder while empty.
-12. Run `bun run format`, `bun run format:check`, and `bun run build`; run
+12. Run `bun run format` and `bun run verify`; run
     `bun run audit` when registry access is available.
-13. Inspect the rendered result when the work has a visual or interactive
+13. Use `docs/RELEASE_CHECKLIST.md` for project-specific production gates. Inspect the rendered result when the work has a visual or interactive
     outcome.
 14. Set `projectConfig.initialized` to `true` only after the checks pass.
 

@@ -36,8 +36,9 @@
 - Work directly on `main`. Do not create branches, worktrees, or pull requests
   unless the user explicitly requests them. When asked to publish changes, push
   `main` to `origin/main`.
-- Run checks proportional to the change and `bun run build` after structural or
-  release-relevant changes.
+- Run checks proportional to the change and `bun run verify` after structural or
+  release-relevant changes. Consult `docs/EXTENSIONS.md` for optional stacks.
+- Keep `bun.lock` and dependency declarations synchronized using Bun; never hand-edit integrity hashes.
 
 Opt-in only: React/Vue/Svelte, CMS, auth, ecommerce, analytics, GTM, consent,
 i18n, theme switching, motion libraries, Playwright, forms, search, APIs,
