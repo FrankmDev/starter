@@ -2,14 +2,14 @@
 
 The starter must be small, secure and project-neutral. Choose extensions after confirming the product needs them.
 
-| Type of site | Start with | Add when needed |
-| --- | --- | --- |
-| Corporate or landing | Static routes, SEO, responsive media | Form endpoint, compliant analytics |
-| Blog/editorial | Astro content collections and Markdown | RSS, search, taxonomy |
-| Multilingual | Locale routes and translated metadata | Translation workflow, language selector |
-| Ecommerce | Editorial storefront and product mapping | Shopify or another backend, live inventory, checkout |
-| Portal/member area | Public shell and user journeys | Auth, authorization, server rendering |
-| Dashboard | Actual data flows | Interactive islands, API, observability |
+| Type of site         | Start with                               | Add when needed                                      |
+| -------------------- | ---------------------------------------- | ---------------------------------------------------- |
+| Corporate or landing | Static routes, SEO, responsive media     | Form endpoint, compliant analytics                   |
+| Blog/editorial       | Astro content collections and Markdown   | RSS, search, taxonomy                                |
+| Multilingual         | Locale routes and translated metadata    | Translation workflow, language selector              |
+| Ecommerce            | Editorial storefront and product mapping | Shopify or another backend, live inventory, checkout |
+| Portal/member area   | Public shell and user journeys           | Auth, authorization, server rendering                |
+| Dashboard            | Actual data flows                        | Interactive islands, API, observability              |
 
 ## Engineering decision gates
 

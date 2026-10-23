@@ -12,7 +12,8 @@ export function validateProjectConfig(config: ProjectConfig): string[] {
   if (!site.language.trim()) errors.push("site.language is required");
   if (!site.locale.trim()) errors.push("site.locale is required");
   if (!seo.defaultTitle.trim()) errors.push("seo.defaultTitle is required");
-  if (!seo.defaultDescription.trim()) errors.push("seo.defaultDescription is required");
+  if (!seo.defaultDescription.trim())
+    errors.push("seo.defaultDescription is required");
 
   if (site.url.trim()) {
     try {
@@ -27,7 +28,8 @@ export function validateProjectConfig(config: ProjectConfig): string[] {
         host.endsWith(".example");
       if (url.protocol !== "https:") errors.push("site.url must use https");
       if (reserved) errors.push("site.url must use a production domain");
-      if (url.username || url.password) errors.push("site.url must not contain credentials");
+      if (url.username || url.password)
+        errors.push("site.url must not contain credentials");
       if (url.port) errors.push("site.url must not contain a custom port");
       if (url.pathname !== "/" || url.search || url.hash) {
         errors.push("site.url must be an origin without path, query, or hash");
@@ -56,8 +58,12 @@ export function validateProjectConfig(config: ProjectConfig): string[] {
     ...navigation.footer,
   ];
   links.forEach((link, index) => {
-    if (!link.label.trim()) errors.push("navigation link " + (index + 1) + " needs a label");
-    if (!/^(\/(?!\/)|#|https:\/\/|mailto:|tel:)/.test(link.href) || /\s/.test(link.href)) {
+    if (!link.label.trim())
+      errors.push("navigation link " + (index + 1) + " needs a label");
+    if (
+      !/^(\/(?!\/)|#|https:\/\/|mailto:|tel:)/.test(link.href) ||
+      /\s/.test(link.href)
+    ) {
       errors.push("navigation link " + (index + 1) + " has an invalid href");
     }
   });

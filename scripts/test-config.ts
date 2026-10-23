@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { projectConfig, type ProjectConfig, type ProjectNavigationHref } from "../project.config";
+import {
+  projectConfig,
+  type ProjectConfig,
+  type ProjectNavigationHref,
+} from "../project.config";
 import { validateProjectConfig } from "./config-validation";
 
 const valid: ProjectConfig = {
@@ -36,13 +40,29 @@ function expectError(edit: (config: ProjectConfig) => void, expected: string) {
   );
 }
 
-expectError((c) => { c.site.name = ""; }, "site.name");
-expectError((c) => { c.site.url = "http://example-studio.es"; }, "must use https");
-expectError((c) => { c.site.url = "https://example.com"; }, "production domain");
-expectError((c) => { c.site.url = "https://example-studio.es/page"; }, "origin");
-expectError((c) => { c.seo.defaultDescription = ""; }, "seo.defaultDescription");
-expectError((c) => { c.seo.defaultImage = "javascript:alert(1)"; }, "seo.defaultImage");
-expectError((c) => { c.navigation.primary[0]!.label = ""; }, "needs a label");
-expectError((c) => { c.navigation.primary[0]!.href = "//bad.example" as ProjectNavigationHref; }, "invalid href");
+expectError((c) => {
+  c.site.name = "";
+}, "site.name");
+expectError((c) => {
+  c.site.url = "http://example-studio.es";
+}, "must use https");
+expectError((c) => {
+  c.site.url = "https://example.com";
+}, "production domain");
+expectError((c) => {
+  c.site.url = "https://example-studio.es/page";
+}, "origin");
+expectError((c) => {
+  c.seo.defaultDescription = "";
+}, "seo.defaultDescription");
+expectError((c) => {
+  c.seo.defaultImage = "javascript:alert(1)";
+}, "seo.defaultImage");
+expectError((c) => {
+  c.navigation.primary[0]!.label = "";
+}, "needs a label");
+expectError((c) => {
+  c.navigation.primary[0]!.href = "//bad.example" as ProjectNavigationHref;
+}, "invalid href");
 
 console.log("Configuration smoke tests passed.");
